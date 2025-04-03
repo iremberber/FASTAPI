@@ -1,0 +1,35 @@
+1. database.py → Veritabanı Bağlantısını Kurma
+    İlk olarak, veritabanı bağlantısını kurmak için database.py dosyasını yazdım.
+    PostgreSQL veritabanına bağlanmak için DATABASE_URL değişkenini tanımladım.
+    SQLAlchemy ile bir engine oluşturdum (bu, veritabanı ile etkileşimi sağlar).
+    Oturum yönetimi (SessionLocal) için bir sessionmaker tanımladım.
+    SQLAlchemy modellerinin türetilmesi için Base sınıfını oluşturdum.
+
+2. models.py → Veritabanı Tablolarını Modellerle Temsil Etme
+    Sonra veritabanındaki tabloları Python sınıfları olarak tanımlamak için models.py dosyasını yazdım.
+    Northwind veritabanındaki tabloları Base sınıfından türeyen modeller olarak oluşturdum.
+    Tablo-sütun ilişkilerini Column, Integer, String, Float gibi SQLAlchemy nesneleriyle tanımladım.
+    İlişkili tablolar için ForeignKey ve relationship kullanarak ilişkileri belirledim (örneğin, Product modeli Category ile ilişkilendirildi).
+    Bu sayede SQLAlchemy ile Python üzerinden veritabanındaki verilere erişim sağlayacak nesneler oluşturmuş oldum.
+
+3. crud.py → Veritabanı İşlemlerini (CRUD) Tanımlama
+    Daha sonra veritabanı işlemlerini yönetmek için crud.py dosyasını yazdım.
+    Ürün ekleme (create_product) fonksiyonunu yazdım.
+    Ürün güncelleme (update_product) fonksiyonunu yazdım.
+    Ürün silme (delete_product) fonksiyonunu yazdım.
+    Bu sayede, Python kodum doğrudan veritabanı ile etkileşime geçerek ürünleri yönetebilecek hale geldi.
+
+4. main.py → FastAPI API Uygulamasını Oluşturma
+    Son olarak FastAPI kullanarak bir REST API oluşturmak için main.py dosyasını yazdım.
+    FastAPI uygulamasını FastAPI() nesnesi ile başlattım.
+    Pydantic modellerini (ProductCreate, ProductUpdate) oluşturarak giriş verilerini doğruladım.
+    Veritabanı bağlantısı için get_db() fonksiyonunu yazdım.
+    CRUD fonksiyonlarını çağıran API endpoint’lerini yazdım:
+        GET /products → Tüm ürünleri getir
+        POST /products → Yeni bir ürün ekle
+        PUT /products/{product_id} → Var olan bir ürünü güncelle
+        DELETE /products/{product_id} → Bir ürünü sil
+        GET /orders → Tüm siparişleri getir
+    Bu şekilde API'yi çalıştırarak tarayıcı üzerinden veya API test araçları ile kullanmaya başladım.
+
+    en son http://127.0.0.1:8000/docs sitesini tarayıcıda çalıştırınca tüm requestlerim geldi.
